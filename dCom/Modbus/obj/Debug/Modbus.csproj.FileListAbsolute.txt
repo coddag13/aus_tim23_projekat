@@ -1,0 +1,9 @@
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\bin\Debug\Modbus.dll
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\bin\Debug\Modbus.pdb
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\bin\Debug\Common.dll
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\bin\Debug\Common.pdb
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\obj\Debug\Modbus.csproj.AssemblyReference.cache
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\obj\Debug\Modbus.csproj.CoreCompileInputs.cache
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\obj\Debug\Modbus.csproj.Up2Date
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\obj\Debug\Modbus.dll
+C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Modbus\obj\Debug\Modbus.pdb
