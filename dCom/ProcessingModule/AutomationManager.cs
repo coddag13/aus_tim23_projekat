@@ -1,5 +1,6 @@
 ﻿using Common;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace ProcessingModule
@@ -60,10 +61,67 @@ namespace ProcessingModule
 
 		private void AutomationWorker_DoWork()
 		{
-			//while (!disposedValue)
-			//{
-			//}
-		}
+            EGUConverter egu = new EGUConverter();
+            PointIdentifier fuel = new PointIdentifier(PointType.ANALOG_OUTPUT, 1000); // kolicina goriva u reze
+            PointIdentifier pump01 = new PointIdentifier(PointType.DIGITAL_OUTPUT, 3000);
+            PointIdentifier pump02 = new PointIdentifier(PointType.DIGITAL_OUTPUT, 3001);
+            PointIdentifier pump03 = new PointIdentifier(PointType.DIGITAL_OUTPUT, 3002);
+            PointIdentifier V1 = new PointIdentifier(PointType.DIGITAL_OUTPUT, 2000);
+            List<PointIdentifier> list = new List<PointIdentifier> { fuel, pump01, pump02, pump03, V1 };
+
+            int fuel_value = 0;
+            while (!disposedValue)
+            {
+                List<IPoint> points = storage.GetPoints(list);
+                // pretvaranje u ing jedinice 
+                fuel_value = (int)egu.ConvertToEGU(points[0].ConfigItem.ScaleFactor, points[0].ConfigItem.Deviation, points[0].RawValue);
+
+                if (points[4].RawValue == 0)
+                {
+                    processingManager.ExecuteWriteCommand(points[1].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump01.Address, 0);
+                    processingManager.ExecuteWriteCommand(points[2].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump02.Address, 0);
+                    processingManager.ExecuteWriteCommand(points[3].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump03.Address, 0);
+                    fuel_value += 10;
+                }
+
+                if (points[1].RawValue == 1)
+                {
+                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    //pumpa 1
+                    fuel_value -= 1;
+
+                }
+                if (points[2].RawValue == 1)
+                {
+                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    // pumpa 2 
+                    fuel_value -= 1;
+                }
+                if (points[3].RawValue == 1)
+                {
+                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    // pumpa 3
+                    fuel_value -= 3;
+                }
+
+                if (points[4].RawValue == 0 && fuel_value >= 990)
+                {
+                    fuel_value = 1000;
+                    processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
+                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1); // zavrce se ventil da se pumpa ne puni vise
+                }
+                else
+                {
+                    processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
+                }
+
+                automationTrigger.WaitOne();
+            }
+
+        }
+
+        
+    
 
 		#region IDisposable Support
 		private bool disposedValue = false; // To detect redundant calls

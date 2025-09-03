@@ -9,3 +9,9 @@ C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Common\obj\Debug\Common.csproj.A
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Common\obj\Debug\Common.dll
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\Common\obj\Debug\Common.pdb
+D:\AUSprojekat\dCom\Common\bin\Debug\Common.dll
+D:\AUSprojekat\dCom\Common\bin\Debug\Common.pdb
+D:\AUSprojekat\dCom\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+D:\AUSprojekat\dCom\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+D:\AUSprojekat\dCom\Common\obj\Debug\Common.dll
+D:\AUSprojekat\dCom\Common\obj\Debug\Common.pdb

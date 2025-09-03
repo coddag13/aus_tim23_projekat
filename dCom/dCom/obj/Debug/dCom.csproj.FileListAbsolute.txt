@@ -48,3 +48,29 @@ C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\dCom\obj\Debug\dCom.csproj.Up2Da
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\dCom\obj\Debug\dCom.exe
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\dCom\obj\Debug\dCom.pdb
 C:\Users\Dell 3520\Desktop\AA\AUS\Projekat\dCom\dCom\obj\Debug\dCom.exe.config
+D:\AUSprojekat\dCom\dCom\bin\Debug\RtuCfg.txt
+D:\AUSprojekat\dCom\dCom\bin\Debug\dCom.exe.config
+D:\AUSprojekat\dCom\dCom\bin\Debug\dCom.exe
+D:\AUSprojekat\dCom\dCom\bin\Debug\dCom.pdb
+D:\AUSprojekat\dCom\dCom\bin\Debug\Common.dll
+D:\AUSprojekat\dCom\dCom\bin\Debug\Modbus.dll
+D:\AUSprojekat\dCom\dCom\bin\Debug\ProcessingModule.dll
+D:\AUSprojekat\dCom\dCom\bin\Debug\Common.pdb
+D:\AUSprojekat\dCom\dCom\bin\Debug\Modbus.pdb
+D:\AUSprojekat\dCom\dCom\bin\Debug\ProcessingModule.pdb
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.csproj.AssemblyReference.cache
+D:\AUSprojekat\dCom\dCom\obj\Debug\ControlWindow.g.cs
+D:\AUSprojekat\dCom\dCom\obj\Debug\MainWindow.g.cs
+D:\AUSprojekat\dCom\dCom\obj\Debug\App.g.cs
+D:\AUSprojekat\dCom\dCom\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom_MarkupCompile.cache
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom_MarkupCompile.lref
+D:\AUSprojekat\dCom\dCom\obj\Debug\ControlWindow.baml
+D:\AUSprojekat\dCom\dCom\obj\Debug\MainWindow.baml
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.g.resources
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.Properties.Resources.resources
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.csproj.GenerateResource.cache
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.csproj.CoreCompileInputs.cache
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.csproj.Up2Date
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.exe
+D:\AUSprojekat\dCom\dCom\obj\Debug\dCom.pdb
