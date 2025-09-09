@@ -1,6 +1,7 @@
 ﻿using Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading;
 
 namespace ProcessingModule
@@ -69,53 +70,70 @@ namespace ProcessingModule
             PointIdentifier V1 = new PointIdentifier(PointType.DIGITAL_OUTPUT, 2000);
             List<PointIdentifier> list = new List<PointIdentifier> { fuel, pump01, pump02, pump03, V1 };
 
-            int fuel_value = 0;
+            
             while (!disposedValue)
             {
+                
                 List<IPoint> points = storage.GetPoints(list);
-                // pretvaranje u ing jedinice 
-                fuel_value = (int)egu.ConvertToEGU(points[0].ConfigItem.ScaleFactor, points[0].ConfigItem.Deviation, points[0].RawValue);
+                if (points.Count == 0)
+                {
+                    Debug.WriteLine("OVOOOOO JE PRAZNO LISTA JE PRAZNA");
+                }
+                else
+                {
+                    Debug.WriteLine("OVOOOOO nijJE PRAZNO LISTA niJE PRAZNA");
+                }
+
+                    // pretvaranje u ing jedinice 
+                    int fuel_value = (int)egu.ConvertToEGU(points[0].ConfigItem.ScaleFactor, points[0].ConfigItem.Deviation, points[0].RawValue);
+                int value = fuel_value;
 
                 if (points[4].RawValue == 0)
                 {
-                    processingManager.ExecuteWriteCommand(points[1].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump01.Address, 0);
+                    /*processingManager.ExecuteWriteCommand(points[1].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump01.Address, 0);
                     processingManager.ExecuteWriteCommand(points[2].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump02.Address, 0);
-                    processingManager.ExecuteWriteCommand(points[3].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump03.Address, 0);
-                    fuel_value += 10;
+                    processingManager.ExecuteWriteCommand(points[3].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, pump03.Address, 0);*/
+                    value += 10;
                 }
-
                 if (points[1].RawValue == 1)
                 {
-                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    // processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
                     //pumpa 1
-                    fuel_value -= 1;
+                    value -= 1;
 
                 }
                 if (points[2].RawValue == 1)
                 {
-                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    //processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
                     // pumpa 2 
-                    fuel_value -= 1;
+                    value -= 1;
                 }
                 if (points[3].RawValue == 1)
                 {
-                    processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);
+                    /*processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1);*/
                     // pumpa 3
-                    fuel_value -= 3;
+                    value -= 3;
                 }
 
-                if (points[4].RawValue == 0 && fuel_value >= 990)
+                if (value != fuel_value)
                 {
-                    fuel_value = 1000;
-                    processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
+                    value = (int)egu.ConvertToRaw(points[0].ConfigItem.ScaleFactor, points[0].ConfigItem.Deviation, value);
+                    processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, value);
+                }
+
+
+               if (points[4].RawValue == 0 && value >= 990)
+                {
+                    value = 1000;
+                   // processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
                     processingManager.ExecuteWriteCommand(points[4].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, V1.Address, 1); // zavrce se ventil da se pumpa ne puni vise
                 }
-                else
+               /* else
                 {
                     processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
-                }
+                }*/
 
-                automationTrigger.WaitOne();
+                automationTrigger.WaitOne(); //zablokira kad stavimo delay betwwen comands
             }
 
         }

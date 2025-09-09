@@ -15,6 +15,14 @@ namespace ProcessingModule
         /// <returns>The alarm indication.</returns>
 		public AlarmType GetAlarmForAnalogPoint(double eguValue, IConfigItem configItem)
 		{
+            if (eguValue < configItem.EGU_Min)
+            {
+                return AlarmType.REASONABILITY_FAILURE;
+            }else if(eguValue> configItem.EGU_Max)
+            {
+                return AlarmType.REASONABILITY_FAILURE;
+            }
+
             if (eguValue > configItem.HighLimit)
             {
                 return AlarmType.HIGH_ALARM;
