@@ -73,7 +73,7 @@ namespace Modbus.ModbusFunctions
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    if (readParams.Quantity < (j + i * 8)) { break; }
+                    if ((j + i * 8) >= readParams.Quantity) break;
                     ushort v = (ushort)(response[9 + i] & (byte)0x1);
                     response[9 + i] /= 2;
                     rijecnik.Add(new Tuple<PointType, ushort>(PointType.DIGITAL_OUTPUT, (ushort)(readParams.StartAddress + (j + i * 8))), v);

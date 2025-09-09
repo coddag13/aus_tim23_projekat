@@ -114,15 +114,10 @@ namespace ProcessingModule
         /// <param name="newValue">The new value.</param>
         private void CommandExecutor_UpdatePointEvent(PointType type, ushort pointAddress, ushort newValue)
         {
-            try
-            {
+          
                 List<IPoint> points = storage.GetPoints(new List<PointIdentifier>(1) { new PointIdentifier(type, pointAddress) });
 
-                foreach (var p in points)
-                {
-                Console.WriteLine($"Velicina liste "+points.Count);
-                Console.WriteLine($"OVOOOO---Description: {p.ConfigItem.Description}, Address: {p.ConfigItem.StartAddress}, Registry type: {p.ConfigItem.RegistryType}, ");
-                }
+           
                 if (type == PointType.ANALOG_INPUT || type == PointType.ANALOG_OUTPUT)
                 {
                     ProcessAnalogPoint(points.First() as IAnalogPoint, newValue);
@@ -131,11 +126,8 @@ namespace ProcessingModule
                 {
                     ProcessDigitalPoint(points.First() as IDigitalPoint, newValue);
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"OVOOOO-----Error at address {pointAddress}: {ex.Message}");
-            }
+           
+            
         }
 
         /// <summary>
