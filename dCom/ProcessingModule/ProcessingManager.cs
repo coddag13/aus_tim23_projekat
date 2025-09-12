@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace ProcessingModule
 {
@@ -63,10 +64,7 @@ namespace ProcessingModule
         /// <param name="value">The value.</param>
         private void ExecuteDigitalCommand(IConfigItem configItem, ushort transactionId, byte remoteUnitAddress, ushort pointAddress, int value)
         {
-            if (pointAddress == 2000)
-            {
-                value = value == 0 ? 1 : 0;
-            }
+           
             ModbusWriteCommandParameters p = new ModbusWriteCommandParameters(6, (byte)ModbusFunctionCode.WRITE_SINGLE_COIL, pointAddress, (ushort)value, transactionId, remoteUnitAddress);
             IModbusFunction fn = FunctionFactory.CreateModbusFunction(p);
             this.functionExecutor.EnqueueCommand(fn);
@@ -137,17 +135,17 @@ namespace ProcessingModule
         /// <param name="newValue">The new value.</param>
         private void ProcessDigitalPoint(IDigitalPoint point, ushort newValue)
         {
-            if (point.ConfigItem.StartAddress == 2000)
-            {
-                point.RawValue = (ushort)(newValue == 0 ? 1 : 0); // invertovano
-            }
-            else
-            {
-                point.RawValue = newValue; // ostali digitalni izlazi normalno
-            }
-            //point.RawValue = newValue;
+            
+            point.RawValue = newValue;
             point.Timestamp = DateTime.Now;
-            point.State = (DState)newValue;
+            if (point.ConfigItem.RegistryType == PointType.DIGITAL_OUTPUT && point.ConfigItem.StartAddress == 2000 ) 
+            {
+                point.DigitalOutputState = (DigitalOutputState)newValue;
+            }
+            else 
+            {
+                point.State = (DState)newValue;
+            }
             point.Alarm = alarmProcessor.GetAlarmForDigitalPoint(point.RawValue, point.ConfigItem);
 
         }

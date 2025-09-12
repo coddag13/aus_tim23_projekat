@@ -5,6 +5,7 @@ namespace dCom.ViewModel
     internal abstract class DigitalBase : BasePointItem, IDigitalPoint
     {
 		private DState state;
+		private DigitalOutputState digitalOutputState;
 
 		public DigitalBase(IConfigItem c, IProcessingManager processingManager, IStateUpdater stateUpdater, IConfiguration configuration, int i) 
 			: base(c, processingManager, stateUpdater, configuration, i)
@@ -25,13 +26,30 @@ namespace dCom.ViewModel
 				OnPropertyChanged("DisplayValue");
 			}
 		}
+        public DigitalOutputState DigitalOutputState
+        {
+            get
+            {
+                return digitalOutputState;
+            }
 
-		public override string DisplayValue
+            set
+            {
+                digitalOutputState = value;
+                OnPropertyChanged("DigitalOutputState");
+                OnPropertyChanged("DisplayValue");
+            }
+        }
+
+        public override string DisplayValue
 		{
 			get
 			{
-				return State.ToString();
-			}
+                if (ConfigItem.RegistryType == PointType.DIGITAL_OUTPUT && ConfigItem.StartAddress==2000)
+                    return DigitalOutputState.ToString();
+                else
+                    return State.ToString();
+            }
 		}
 
         protected override bool WriteCommand_CanExecute(object obj)

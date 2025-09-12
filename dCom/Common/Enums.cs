@@ -8,7 +8,11 @@
 		OFF = 0,
 		ON = 1,
 	}
-
+    public enum DigitalOutputState : short
+    {
+        OFF = 1,
+        ON = 0,
+    }
     /// <summary>
     /// Modbus Function codes for reading and writing modbus points.
     /// </summary>

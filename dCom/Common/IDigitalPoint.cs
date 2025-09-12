@@ -9,5 +9,6 @@
         /// Gets or sets the state of the digital point.
         /// </summary>
   		DState State { get; set; }
+  		DigitalOutputState DigitalOutputState { get; set; }
     }
 }
