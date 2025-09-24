@@ -115,7 +115,7 @@ namespace ProcessingModule
                 }
 
 
-               if (points[4].RawValue == 0 && value >= 590)
+               if (points[4].RawValue == 0 && value >= 990)
                 {
                     value = 1000;
                    // processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
