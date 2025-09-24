@@ -126,7 +126,7 @@ namespace ProcessingModule
                     processingManager.ExecuteWriteCommand(points[0].ConfigItem, configuration.GetTransactionId(), configuration.UnitAddress, fuel.Address, fuel_value);
                 }*/
 
-                automationTrigger.WaitOne(); //zablokira kad stavimo delay betwwen comands
+                automationTrigger.WaitOne(delayBetweenCommands); //zablokira kad stavimo delay betwwen comands
             }
 
         }
@@ -165,7 +165,7 @@ namespace ProcessingModule
         /// <inheritdoc />
         public void Start(int delayBetweenCommands)
 		{
-			this.delayBetweenCommands = delayBetweenCommands*1000;
+			this.delayBetweenCommands = 1000;
             InitializeAndStartThreads();
 		}
 
